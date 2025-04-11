@@ -1,12 +1,8 @@
 import Home from "@/components/home";
 import { redirect } from "next/navigation";
 
-const MainPage = async ({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
-  const session = await searchParams?.session as string;
+const MainPage = async ({ searchParams }: any) => {
+  const session = (await searchParams?.session) as string;
   const dataJson = await fetch(
     "https://gx4ppg428c.execute-api.us-east-1.amazonaws.com/dev/hello",
     {
@@ -17,10 +13,10 @@ const MainPage = async ({
   );
   const data = await dataJson.json();
 
-  if(!data || data.message === 'The incoming token has expired') {
-    return redirect('/')
+  if (!data || data.message === "The incoming token has expired") {
+    return redirect("/");
   }
-  
+
   return <Home message={data.message} session={session} />;
 };
 

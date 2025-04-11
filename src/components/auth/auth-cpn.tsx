@@ -17,7 +17,7 @@ const AuthCpn = () => {
       });
     }
     setLoading(false);
-  }, [authStatus]);
+  }, [authStatus, router]);
 
   if (loading) {
     return <div>Loading.....</div>;
